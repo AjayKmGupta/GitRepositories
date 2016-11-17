@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>SDET</display-name>
+  <welcome-file-list>
+    <welcome-file>register.jsp</welcome-file>
+  </welcome-file-list>
+
+<servlet>
+    <display-name>RegisterEmployee</display-name>
+    <servlet-name>RegisterEmployee</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.RegisterEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterEmployee</servlet-name>
+    <url-pattern>/RegisterEmployee</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>ViewAllEmployees</display-name>
+    <servlet-name>ViewAllEmployees</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.ViewAllEmployees</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAllEmployees</servlet-name>
+    <url-pattern>/ViewAllEmployees</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>EditServlet</display-name>
+    <servlet-name>EditServlet</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditServlet</servlet-name>
+    <url-pattern>/EditServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>DeleteEmployee</display-name>
+    <servlet-name>DeleteEmployee</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.DeleteEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteEmployee</servlet-name>
+    <url-pattern>/DeleteEmployee</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>UpdateDetails</display-name>
+    <servlet-name>UpdateDetails</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.UpdateDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateDetails</servlet-name>
+    <url-pattern>/UpdateDetails</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>SearchEmployee</display-name>
+    <servlet-name>SearchEmployee</servlet-name>
+    <servlet-class>com.mindtree.sdet.controller.SearchEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchEmployee</servlet-name>
+    <url-pattern>/SearchEmployee</url-pattern>
+  </servlet-mapping>
+</web-app>

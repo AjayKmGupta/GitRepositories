@@ -1,0 +1,44 @@
+.btn, .input-md, .control-label {
+	margin-top: 10px;
+}
+
+.left, .right, .search {
+	margin: 20px;
+}
+
+.field {
+	margin: 3% 10% 2% 5%;
+}
+
+.left-nav {
+	margin: 2% 20%;
+}
+
+.content {
+	margin-top: 25px;
+	width: 100%;
+	color: black;
+}
+
+.astricStyle {
+	color: red;
+}
+
+.searchBox, .menubtn {
+	font-size: 20px;
+	color: #3933FF;
+	margin-left:5px;
+}
+
+.btn-link {
+	font-size: 20px;
+}
+
+.well {
+	background-color: #FDEBD0;
+	margin-left:50px;
+	margin-right:50px;
+}
+.col-md-12{
+	width:93.5%;
+}
