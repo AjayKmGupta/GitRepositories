@@ -21,7 +21,7 @@ public class DeleteEmployee extends HttpServlet {
 			throws ServletException, IOException {
 
 		EmployeeService manager = new EmployeeService();
-		String msg = "";
+		String msg;
 		
 		String sid = request.getParameter("id");
 		try {
