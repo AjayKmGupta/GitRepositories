@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@page import="java.util.List"%>
-<%@page import="com.mindtree.sdet.entitiy.Employee"%>
+<%@page import="com.sdet.entitiy.Employee"%>
 <!DOCTYPE html>
 <html>
 
