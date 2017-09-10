@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="com.mindtree.sdet.entitiy.Employee"%>
+<%@page import="com.sdet.entitiy.Employee"%>
 <!DOCTYPE html>
 
 <html>
