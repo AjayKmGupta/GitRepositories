@@ -1,4 +1,4 @@
-package com.mindtree.sdet.controller;
+package com.sdet.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mindtree.sdet.entitiy.Competency;
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.entitiy.Vertical;
-import com.mindtree.sdet.exceptions.FetchException;
-import com.mindtree.sdet.service.EmployeeService;
+import com.sdet.entitiy.Competency;
+import com.sdet.entitiy.Employee;
+import com.sdet.entitiy.Vertical;
+import com.sdet.exceptions.FetchException;
+import com.sdet.service.EmployeeService;
 
 /**
  * Servlet implementation class ViewAllEmployees

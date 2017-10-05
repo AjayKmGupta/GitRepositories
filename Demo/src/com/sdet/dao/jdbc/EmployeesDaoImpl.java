@@ -1,4 +1,4 @@
-package com.mindtree.sdet.dao.jdbc;
+package com.sdet.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,12 +10,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.mindtree.sdet.dao.EmployeesDao;
-import com.mindtree.sdet.entitiy.Competency;
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.entitiy.Vertical;
-import com.mindtree.sdet.exceptions.DaoException;
-import com.mindtree.sdet.utility.DBUtil;
+import com.sdet.dao.EmployeesDao;
+import com.sdet.entitiy.Competency;
+import com.sdet.entitiy.Employee;
+import com.sdet.entitiy.Vertical;
+import com.sdet.exceptions.DaoException;
+import com.sdet.utility.DBUtil;
 
 public class EmployeesDaoImpl implements EmployeesDao {
 

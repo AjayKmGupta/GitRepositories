@@ -1,10 +1,10 @@
-package com.mindtree.sdet.utility;
+package com.sdet.utility;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mindtree.sdet.exceptions.DaoException;
+import com.sdet.exceptions.DaoException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;

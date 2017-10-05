@@ -1,4 +1,4 @@
-package com.mindtree.sdet.controller;
+package com.sdet.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.exceptions.FetchException;
-import com.mindtree.sdet.exceptions.UpdateException;
-import com.mindtree.sdet.service.EmployeeService;
+import com.sdet.entitiy.Employee;
+import com.sdet.exceptions.FetchException;
+import com.sdet.exceptions.UpdateException;
+import com.sdet.service.EmployeeService;
 
 /**
  * Servlet implementation class UpdateDetails

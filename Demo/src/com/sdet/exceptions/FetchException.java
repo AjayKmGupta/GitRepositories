@@ -1,4 +1,4 @@
-package com.mindtree.sdet.exceptions;
+package com.sdet.exceptions;
 
 @SuppressWarnings("serial")
 public class FetchException extends Exception {

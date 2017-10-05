@@ -1,4 +1,4 @@
-package com.mindtree.sdet.controller;
+package com.sdet.controller;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mindtree.sdet.exceptions.DeleteException;
-import com.mindtree.sdet.service.EmployeeService;
+import com.sdet.exceptions.DeleteException;
+import com.sdet.service.EmployeeService;
 
 /**
  * Servlet implementation class DeleteEmployee

@@ -1,16 +1,16 @@
-package com.mindtree.sdet.junit;
+package com.sdet.junit;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.exceptions.DeleteException;
-import com.mindtree.sdet.exceptions.FetchException;
-import com.mindtree.sdet.exceptions.PersistentException;
-import com.mindtree.sdet.exceptions.UpdateException;
-import com.mindtree.sdet.service.EmployeeService;
+import com.sdet.entitiy.Employee;
+import com.sdet.exceptions.DeleteException;
+import com.sdet.exceptions.FetchException;
+import com.sdet.exceptions.PersistentException;
+import com.sdet.exceptions.UpdateException;
+import com.sdet.service.EmployeeService;
 
 public class EmployeeTest {
 

@@ -1,19 +1,19 @@
-package com.mindtree.sdet.service;
+package com.sdet.service;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mindtree.sdet.dao.EmployeesDao;
-import com.mindtree.sdet.dao.jdbc.EmployeesDaoImpl;
-import com.mindtree.sdet.entitiy.Competency;
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.entitiy.Vertical;
-import com.mindtree.sdet.exceptions.DaoException;
-import com.mindtree.sdet.exceptions.DeleteException;
-import com.mindtree.sdet.exceptions.FetchException;
-import com.mindtree.sdet.exceptions.PersistentException;
-import com.mindtree.sdet.exceptions.UpdateException;
+import com.sdet.dao.EmployeesDao;
+import com.sdet.dao.jdbc.EmployeesDaoImpl;
+import com.sdet.entitiy.Competency;
+import com.sdet.entitiy.Employee;
+import com.sdet.entitiy.Vertical;
+import com.sdet.exceptions.DaoException;
+import com.sdet.exceptions.DeleteException;
+import com.sdet.exceptions.FetchException;
+import com.sdet.exceptions.PersistentException;
+import com.sdet.exceptions.UpdateException;
 
 public class EmployeeService {
 

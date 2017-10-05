@@ -1,11 +1,11 @@
-package com.mindtree.sdet.dao;
+package com.sdet.dao;
 
 import java.util.List;
 
-import com.mindtree.sdet.entitiy.Competency;
-import com.mindtree.sdet.entitiy.Employee;
-import com.mindtree.sdet.entitiy.Vertical;
-import com.mindtree.sdet.exceptions.DaoException;
+import com.sdet.entitiy.Competency;
+import com.sdet.entitiy.Employee;
+import com.sdet.entitiy.Vertical;
+import com.sdet.exceptions.DaoException;
 
 public interface EmployeesDao {
 

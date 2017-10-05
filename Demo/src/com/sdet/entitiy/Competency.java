@@ -1,4 +1,4 @@
-package com.mindtree.sdet.entitiy;
+package com.sdet.entitiy;
 
 public class Competency {
 	private String code;
