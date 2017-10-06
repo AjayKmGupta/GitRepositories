@@ -8,7 +8,7 @@
 <servlet>
     <display-name>RegisterEmployee</display-name>
     <servlet-name>RegisterEmployee</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.RegisterEmployee</servlet-class>
+    <servlet-class>com.sdet.controller.RegisterEmployee</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterEmployee</servlet-name>
@@ -18,7 +18,7 @@
   <servlet>
     <display-name>ViewAllEmployees</display-name>
     <servlet-name>ViewAllEmployees</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.ViewAllEmployees</servlet-class>
+    <servlet-class>com.sdet.controller.ViewAllEmployees</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewAllEmployees</servlet-name>
@@ -28,7 +28,7 @@
   <servlet>
     <display-name>EditServlet</display-name>
     <servlet-name>EditServlet</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.EditServlet</servlet-class>
+    <servlet-class>com.sdet.controller.EditServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditServlet</servlet-name>
@@ -38,7 +38,7 @@
   <servlet>
     <display-name>DeleteEmployee</display-name>
     <servlet-name>DeleteEmployee</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.DeleteEmployee</servlet-class>
+    <servlet-class>com.sdet.controller.DeleteEmployee</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteEmployee</servlet-name>
@@ -48,7 +48,7 @@
   <servlet>
     <display-name>UpdateDetails</display-name>
     <servlet-name>UpdateDetails</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.UpdateDetails</servlet-class>
+    <servlet-class>com.sdet.controller.UpdateDetails</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateDetails</servlet-name>
@@ -58,7 +58,7 @@
   <servlet>
     <display-name>SearchEmployee</display-name>
     <servlet-name>SearchEmployee</servlet-name>
-    <servlet-class>com.mindtree.sdet.controller.SearchEmployee</servlet-class>
+    <servlet-class>com.sdet.controller.SearchEmployee</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchEmployee</servlet-name>
