@@ -16,9 +16,10 @@ public class EmployeeTest {
 
 @Test
 public void testGetEmployeeById() throws FetchException {
-	Employee empExp = new Employee("M1030571", "Ajay Kumar Gupta", "RCM", "Testing", "C1");
+	Employee empExp = new Employee("M1030571", "Ajay Kumar Gupta", "RCM", "SDET", "C2");
 	EmployeeService serviceObj =  new EmployeeService();
 	Employee empAct = serviceObj.getEmployeeById("M1030571");
+	System.out.println(empAct.getMid() + " " + empAct.getEname() + " " + empAct.getVertical() + " " + empAct.getPractice() + " " + empAct.getCompetency());
     Assert.assertEquals(empExp, empAct);
 }
 	
