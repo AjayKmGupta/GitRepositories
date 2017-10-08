@@ -1,7 +1,5 @@
 package com.sdet.selenium;
 
-import static org.testng.Assert.assertTrue;
-
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -11,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import junit.framework.Assert;
 
 public class EmployeeSeleniumTest {
 	
@@ -28,7 +28,7 @@ public class EmployeeSeleniumTest {
 		driver.get("http://localhost:8085/Demo/");
 		WebElement el = driver.findElement(By.xpath("//*[contains(text(),'View All')]"));
 		el.click();
-		assertTrue(driver.findElement(By.cssSelector("[class*='text-success']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.cssSelector("[class*='text-success']")).isDisplayed());
 	}
 
 	@AfterClass
