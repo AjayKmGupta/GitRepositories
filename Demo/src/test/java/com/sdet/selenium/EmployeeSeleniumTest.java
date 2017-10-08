@@ -4,19 +4,19 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
 
 public class EmployeeSeleniumTest {
 	
 	private WebDriver driver;
 	
-	@BeforeSuite
+	@BeforeClass
 	public void setupDriver() {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -31,7 +31,7 @@ public class EmployeeSeleniumTest {
 		assertTrue(driver.findElement(By.cssSelector("[class*='text-success']")).isDisplayed());
 	}
 
-	@AfterSuite
+	@AfterClass
 	public void destroyDriver() {
 		driver.close();
 	}
