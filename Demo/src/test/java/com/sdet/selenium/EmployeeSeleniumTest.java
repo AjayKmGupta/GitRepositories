@@ -14,10 +14,10 @@ import junit.framework.Assert;
 
 public class EmployeeSeleniumTest {
 	
-	private WebDriver driver;
+	private static WebDriver driver;
 	
 	@BeforeClass
-	public void setupDriver() {
+	public static void setupDriver() {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -32,7 +32,7 @@ public class EmployeeSeleniumTest {
 	}
 
 	@AfterClass
-	public void destroyDriver() {
+	public static void destroyDriver() {
 		driver.close();
 	}
 	
