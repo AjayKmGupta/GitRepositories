@@ -12,6 +12,7 @@ import com.sdet.exceptions.PersistentException;
 import com.sdet.exceptions.UpdateException;
 import com.sdet.service.EmployeeService;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeTest {
 
 @Test
