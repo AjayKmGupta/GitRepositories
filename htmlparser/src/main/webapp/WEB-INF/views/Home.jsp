@@ -1,17 +1,29 @@
 <html>
 <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <body data-ng-app="HTMLParserApp">
-	<h1>HTML Parser</h1>
+	<h1 align="center" style="color: #33cc33;">HTML Parser</h1>
 	<br>
 	<div data-ng-controller="HTMLParserController">
-		<div class="form-group">
-			<label for="HTML-Text">HTML Text:</label>
-		</div>
-		<textarea class="form-control" rows="5" cols="50"
-			data-ng-model="htmlText" maxlength="2000"></textarea>
-		<div>{{htmlText.length}}</div>
-		<input class="form-group btn btn-info" type="submit"
-			data-ng-click="submitHTMLText()">
+		<form name="parserForm" novalidate>
+			<div class="form-group">
+				<label for="HTML-Text" style="margin-left: 20px;">HTML Text:</label>
+				<textarea class="form-control" name="htmlText" rows="5" cols="50"
+					data-ng-model="htmlText" style="max-width: 90%; margin-left: 20px;"
+					maxlength="2000" required></textarea>
+				<span style="color: red;"
+					data-ng-show="parserForm.htmlText.$touched && parserForm.htmlText.$invalid">
+					<span data-ng-show="parserForm.htmlText.$error.required">Please
+						enter text.</span>
+				</span>
+				<div>{{htmlText.length}}</div>
+			</div>
+			<div style="margin-left: 400px;" class="form-group">
+				<input class="btn btn-info" type="submit"
+					data-ng-click="submitHTMLText()"> <input
+					style="margin-left: 100px;" type="reset" class="btn btn-danger"
+					data-ng-click="clearText()">
+			</div>
+		</form>
 		<table class="table">
 			<tr>
 				<td>Attempt Number</td>

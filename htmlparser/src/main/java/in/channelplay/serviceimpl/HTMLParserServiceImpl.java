@@ -38,11 +38,11 @@ public class HTMLParserServiceImpl implements HTMLParserService {
 	private String getCurrentFormattedDateTime() {
 
 		Calendar calendar = GregorianCalendar.getInstance();
-		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm z");
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
 		df.setCalendar(calendar);
 		df.setTimeZone(TimeZone.getTimeZone("GMT"));
 		String date = df.format(calendar.getTime());
-		return date;
+		return date + " HRS GMT";
 	}
 
 }
