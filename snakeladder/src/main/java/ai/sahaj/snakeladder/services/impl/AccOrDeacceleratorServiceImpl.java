@@ -67,7 +67,7 @@ public class AccOrDeacceleratorServiceImpl implements AccOrDeacceleratorService 
 		Optional<Position> optFinalPos = posService.getPositions().stream()
 				.filter(p -> p.getNumber() == accOrDeaccDto.getFinalPosition().getNumber()).findFirst();
 		if (optStartPos.isEmpty() || optFinalPos.isEmpty()) {
-			throw new ResourceNotFoundException("The given position dosn't cxists");
+			throw new ResourceNotFoundException("The given position doesn't exists");
 		}
 		accOrDeacc.setStartPos(optStartPos.get());
 		accOrDeacc.setFinalPosition(optFinalPos.get());
@@ -125,13 +125,24 @@ public class AccOrDeacceleratorServiceImpl implements AccOrDeacceleratorService 
 	}
 
 	private void checkIfAccOrDeaccIsValid(AccOrDeaccelerator accOrDeacc, AddAccOrDeacceleratorDto accOrDeaccDto) {
+
+		if (accOrDeaccDto.getAccOrDeAccType() == AccOrDeacceleratorType.LADDER
+				&& accOrDeaccDto.getStartPos().getNumber() > accOrDeaccDto.getFinalPosition().getNumber()) {
+			throw new BadRequestException("Ladder start position should be less than the final position");
+		}
+
+		if (accOrDeaccDto.getAccOrDeAccType() == AccOrDeacceleratorType.SNAKE
+				&& accOrDeaccDto.getStartPos().getNumber() < accOrDeaccDto.getFinalPosition().getNumber()) {
+			throw new BadRequestException("Snake start position should be greater than the final position");
+		}
+
 		if (accOrDeacc.getStartPos().getNumber() == accOrDeaccDto.getStartPos().getNumber()) {
-			throw new BadRequestException("Ladder and snake can have same start point");
+			throw new BadRequestException("Ladder and snake can't have same start point");
 		}
 
 		if (accOrDeaccDto.getAccOrDeAccType() == AccOrDeacceleratorType.LADDER
 				&& accOrDeacc.getAccOrDeAccType() == AccOrDeacceleratorType.SNAKE
-				&& accOrDeaccDto.getFinalPosition().getNumber() == accOrDeaccDto.getStartPos().getNumber()) {
+				&& accOrDeaccDto.getFinalPosition().getNumber() == accOrDeacc.getStartPos().getNumber()) {
 			throw new BadRequestException("Ladder can't have final position at snake start point");
 		}
 	}
