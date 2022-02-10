@@ -1,17 +1,15 @@
 package ai.sahaj.snakeladder.services.impl;
 
-import org.springframework.stereotype.Service;
-
-import ai.sahaj.snakeladder.dto.backend.SimulationDataDto;
+import ai.sahaj.snakeladder.dto.backend.TrackGameMovement;
+import ai.sahaj.snakeladder.entity.Game;
 import ai.sahaj.snakeladder.entity.Simulation;
 import ai.sahaj.snakeladder.exceptions.BadRequestException;
-import ai.sahaj.snakeladder.services.GameService;
+import ai.sahaj.snakeladder.services.DiceService;
 
-@Service("manualModeGameService")
-public class ManualModeGameServiceImpl implements GameService {
+public class ManualModeGameServiceImpl extends GameServiceImpl {
 
 	@Override
-	public SimulationDataDto play(Simulation simulation) {
+	public TrackGameMovement play(Simulation simulation, Game game, DiceService diceServie) {
 		throw new BadRequestException("Manual mode will be supported soon");
 	}
 

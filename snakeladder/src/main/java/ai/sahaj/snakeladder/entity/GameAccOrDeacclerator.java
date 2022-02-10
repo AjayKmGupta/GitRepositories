@@ -5,26 +5,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
-@Data
 @NoArgsConstructor
-public class Roll {
+@AllArgsConstructor
+@Data
+@Entity
+public class GameAccOrDeacclerator {
 
 	@Id
 	private String id;
-	private int noOfRolls;
-	private int faceValue;
 	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name = "game_id", nullable = false)
 	private Game game;
-
-	public Roll(String id) {
-		this.id = id;
-	}
+	@ToString.Exclude
+	@ManyToOne
+	@JoinColumn(name = "acc_or_deacc_id", nullable = false)
+	private AccOrDeaccelerator accOrDeacc;
 
 }

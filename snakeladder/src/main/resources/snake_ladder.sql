@@ -1,17 +1,12 @@
-create database snakeladder_db;
-use snakeladder_db;
-
-LOCK TABLES `position` WRITE;
-/*!40000 ALTER TABLE `position` DISABLE KEYS */;
-INSERT INTO `position` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20),(21,21),(22,22),(23,23),(24,24),(25,25),(26,26),(27,27),(28,28),(29,29),(30,30),(31,31),(32,32),(33,33),(34,34),(35,35),(36,36),(37,37),(38,38),(39,39),(40,40),(41,41),(42,42),(43,43),(44,44),(45,45),(46,46),(47,47),(48,48),(49,49),(50,50),(51,51),(52,52),(53,53),(54,54),(55,55),(56,56),(57,57),(58,58),(59,59),(60,60),(61,61),(62,62),(63,63),(64,64),(65,65),(66,66),(67,67),(68,68),(69,69),(70,70),(71,71),(72,72),(73,73),(74,74),(75,75),(76,76),(77,77),(78,78),(79,79),(80,80),(81,81),(82,82),(83,83),(84,84),(85,85),(86,86),(87,87),(88,88),(89,89),(90,90),(91,91),(92,92),(93,93),(94,94),(95,95),(96,96),(97,97),(98,98),(99,99),(100,100);
-/*!40000 ALTER TABLE `position` ENABLE KEYS */;
+LOCK TABLES `acc_or_deaccelerator` WRITE;
+/*!40000 ALTER TABLE `acc_or_deaccelerator` DISABLE KEYS */;
+INSERT INTO `acc_or_deaccelerator` VALUES (1,1,41,99),(2,0,92,74),(3,1,53,89),(4,0,81,62),(5,1,58,76),(6,0,69,50),(7,1,45,66),(8,0,63,42),(9,1,31,54),(10,1,18,43),(11,0,46,13),(12,0,49,33),(13,1,3,40),(14,1,5,27),(15,0,25,4);
+/*!40000 ALTER TABLE `acc_or_deaccelerator` ENABLE KEYS */;
 UNLOCK TABLES;
 
-LOCK TABLES `player` WRITE;
-/*!40000 ALTER TABLE `player` DISABLE KEYS */;
-INSERT INTO `player` VALUES (1,'ajay@abc.ai','Ajay'),(2,'kishan@abc.ai','Kishan');
-/*!40000 ALTER TABLE `player` ENABLE KEYS */;
-UNLOCK TABLES;
+--
+-- Dumping data for table `board`
+--
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
@@ -19,13 +14,82 @@ INSERT INTO `board` VALUES (1,'First Board',100,1);
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
-LOCK TABLES `acc_or_deaccelerator` WRITE;
-/*!40000 ALTER TABLE `acc_or_deaccelerator` DISABLE KEYS */;
-INSERT INTO `acc_or_deaccelerator` VALUES (1,1,1,41,99),(2,0,1,92,74),(3,1,1,53,89),(4,0,1,81,62),(5,1,1,58,76),(6,0,1,63,42),(7,0,1,69,50),(8,1,1,31,54),(9,0,1,49,33),(10,0,1,46,13),(11,1,1,18,43),(12,1,1,3,40),(13,0,1,25,4),(14,1,1,5,27),(15,1,1,45,66);
-/*!40000 ALTER TABLE `acc_or_deaccelerator` ENABLE KEYS */;
+--
+-- Dumping data for table `board_acc_or_deacc`
+--
+
+LOCK TABLES `board_acc_or_deacc` WRITE;
+/*!40000 ALTER TABLE `board_acc_or_deacc` DISABLE KEYS */;
+INSERT INTO `board_acc_or_deacc` VALUES (1,14),(1,8),(1,5),(1,12),(1,6),(1,2),(1,9),(1,4),(1,13),(1,7),(1,1),(1,10),(1,11),(1,15),(1,3);
+/*!40000 ALTER TABLE `board_acc_or_deacc` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Dumping data for table `game`
+--
 
+LOCK TABLES `game` WRITE;
+/*!40000 ALTER TABLE `game` DISABLE KEYS */;
+INSERT INTO `game` VALUES ('5458ef15-9087-442e-9155-0ea22756844b','fa5a2d45-ab82-466b-9301-39de35de24d9',1),('99f31573-2e0b-4e45-b561-eee730cc17f6','fa5a2d45-ab82-466b-9301-39de35de24d9',1);
+/*!40000 ALTER TABLE `game` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Dumping data for table `game_acc_or_deacclerator`
+--
 
+LOCK TABLES `game_acc_or_deacclerator` WRITE;
+/*!40000 ALTER TABLE `game_acc_or_deacclerator` DISABLE KEYS */;
+INSERT INTO `game_acc_or_deacclerator` VALUES ('b85a7188-d0c7-487e-8bc0-e599f0aeebfb',10,'5458ef15-9087-442e-9155-0ea22756844b'),('8364245b-d203-4d53-a3a0-847c3dbceb36',11,'5458ef15-9087-442e-9155-0ea22756844b'),('b91b11c7-a06e-41c2-80bd-c490d045b9e7',1,'5458ef15-9087-442e-9155-0ea22756844b'),('1f08a128-3aa6-42e7-8634-2c0a429da85f',5,'5458ef15-9087-442e-9155-0ea22756844b'),('065a41ea-b5c8-43f1-996e-7ca275a42c8f',2,'5458ef15-9087-442e-9155-0ea22756844b'),('c2641a7d-467f-407a-8f1d-da6fa49733a8',6,'5458ef15-9087-442e-9155-0ea22756844b'),('a95a8f60-c8ca-4a04-b066-5283426d879f',6,'5458ef15-9087-442e-9155-0ea22756844b'),('ccb1102a-bbfc-412f-98dd-e6e602b25ae6',12,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('c23ce2f4-e14a-4fce-bfe3-ba0c566a9cb2',4,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('330018f0-b223-4682-82b6-08c345977284',15,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('a8998f80-0a54-46c3-a435-b3c5b8584641',12,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('d47556af-6ec6-4b21-b017-14f9eaad24be',15,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('2b14b9f2-ea15-48dc-8de8-158648d7b52b',9,'99f31573-2e0b-4e45-b561-eee730cc17f6');
+/*!40000 ALTER TABLE `game_acc_or_deacclerator` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Dumping data for table `player`
+--
+
+LOCK TABLES `player` WRITE;
+/*!40000 ALTER TABLE `player` DISABLE KEYS */;
+INSERT INTO `player` VALUES (1,'def@xyz@ai','def'),(2,'abc@xyz@ai','abc');
+/*!40000 ALTER TABLE `player` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `position`
+--
+
+LOCK TABLES `position` WRITE;
+/*!40000 ALTER TABLE `position` DISABLE KEYS */;
+INSERT INTO `position` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20),(21,21),(22,22),(23,23),(24,24),(25,25),(26,26),(27,27),(28,28),(29,29),(30,30),(31,31),(32,32),(33,33),(34,34),(35,35),(36,36),(37,37),(38,38),(39,39),(40,40),(41,41),(42,42),(43,43),(44,44),(45,45),(46,46),(47,47),(48,48),(49,49),(50,50),(51,51),(52,52),(53,53),(54,54),(55,55),(56,56),(57,57),(58,58),(59,59),(60,60),(61,61),(62,62),(63,63),(64,64),(65,65),(66,66),(67,67),(68,68),(69,69),(70,70),(71,71),(72,72),(73,73),(74,74),(75,75),(76,76),(77,77),(78,78),(79,79),(80,80),(81,81),(82,82),(83,83),(84,84),(85,85),(86,86),(87,87),(88,88),(89,89),(90,90),(91,91),(92,92),(93,93),(94,94),(95,95),(96,96),(97,97),(98,98),(99,99),(100,100);
+/*!40000 ALTER TABLE `position` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `roll`
+--
+
+LOCK TABLES `roll` WRITE;
+/*!40000 ALTER TABLE `roll` DISABLE KEYS */;
+INSERT INTO `roll` VALUES ('44a15c20-8533-47ed-ade2-8537a5197837',4,2,'5458ef15-9087-442e-9155-0ea22756844b'),('f497cdaf-45ef-4dd3-9408-1891d0608516',1,2,'5458ef15-9087-442e-9155-0ea22756844b'),('5d9f71c8-ec5a-450c-abe0-a2ff89b3ec2f',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('b2831464-0ec2-42ee-9040-ec751cc15f66',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('b7cc2e0b-e66c-4324-86ac-ec97c9ec3792',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('269e3c09-5eeb-4569-9f5c-5bc81ecae1df',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('38bea245-44df-4ceb-b22b-a3f787863532',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('cdbd635e-7b61-4d9d-a285-22768e2d07df',4,1,'5458ef15-9087-442e-9155-0ea22756844b'),('da92552a-c5c8-4222-8e4d-1719c56dfa40',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('8986ffac-e5d6-4ad1-a731-6678a97675ff',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('13912b60-1d62-405f-871f-70b57aacd14a',3,1,'5458ef15-9087-442e-9155-0ea22756844b'),('fcb7fa01-97d2-4706-9604-a36a35fdc20b',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('0e201f22-9029-41ce-9825-fe724a3e491f',3,1,'5458ef15-9087-442e-9155-0ea22756844b'),('260c545b-c832-4c2f-ae5e-d5fe2baf301d',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('6e37d96e-6662-4350-a070-97f2c3c41fdd',1,2,'5458ef15-9087-442e-9155-0ea22756844b'),('05251345-91f2-452e-8a13-a31a21010172',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('e172261c-46c7-48f8-a682-84174d130b0f',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('f35745e5-6a1f-4244-813a-0dcd27d6edd4',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('fc971c36-702d-42fa-9987-99fe2bdcd4bf',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('e1e3a6b6-1b3b-4d8e-9f54-d25577212133',4,1,'5458ef15-9087-442e-9155-0ea22756844b'),('37c6fd1c-2d48-4ef4-85e1-0b8a4b78bc06',3,1,'5458ef15-9087-442e-9155-0ea22756844b'),('d8af2c91-e640-4099-a3fb-49b02175c19c',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('669cbeee-3dda-45e8-b440-59160672c044',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('3c090ae1-b69d-4f6c-95d9-9346b475792c',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('b70c142c-4bd7-41e4-9d92-9394324a3cd8',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('56ac8556-aed3-4eb7-a650-11ffcf674199',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('c1c1bb5b-cc37-400b-86f3-7c8d5c3406e0',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('3a062882-fdd8-4053-85c7-517fe68475f9',1,1,'5458ef15-9087-442e-9155-0ea22756844b'),('694c247a-f202-487c-8b48-621d0f18557a',3,1,'5458ef15-9087-442e-9155-0ea22756844b'),('c40df745-e12e-423a-91c9-ef2eaca6ee19',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('ecb6641a-7d96-4325-beb2-0236ac073099',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('bbc2e408-fd43-4740-8b26-757ffd89e896',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('edc3eb1f-18fb-435c-84a5-d288cfd2b11d',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('6358496c-72fd-4ebf-a753-b4a7ef1e1fdf',4,2,'5458ef15-9087-442e-9155-0ea22756844b'),('69a27660-d1fc-464f-b72e-fec96035dfae',2,2,'5458ef15-9087-442e-9155-0ea22756844b'),('f306af28-a2c7-4778-ba82-6341ca6d0158',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('3c4a27b4-6e34-41fc-a94a-0ea6d7a81a8c',4,2,'5458ef15-9087-442e-9155-0ea22756844b'),('8c4d71c1-9a02-40a3-8f25-0aaac6b88c07',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('ec69e302-cb71-48ff-8691-1d8f08a5cf28',4,1,'5458ef15-9087-442e-9155-0ea22756844b'),('42356cca-135f-4b7c-a726-3038d4673725',5,1,'5458ef15-9087-442e-9155-0ea22756844b'),('a1388182-b166-40a7-8446-4de72336e145',2,1,'5458ef15-9087-442e-9155-0ea22756844b'),('0ff099f9-dc0a-4938-b97a-dbf2d67fa70e',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('1da96617-7e68-455b-8ca2-47f66a3fb958',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('a4c66aec-14bb-4186-a233-7d60a6b8cf9e',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('d7eb5a2b-38ee-4bc3-bc36-3404a7442fa1',1,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('d3c404db-09d7-444d-8bcc-860c749d61db',1,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('107b23d2-509f-44d5-9a20-f9cf6d59d4dd',2,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('47a679df-c3d5-4fa4-b001-8a4ba39a1c1e',2,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('c1e78079-81da-4388-9189-0386cebd0775',2,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('71c753bb-8f61-4753-b533-c33e620c1c47',1,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('99b275eb-8d23-4f2d-9688-da4a8284dbde',3,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('44b4bd6d-df19-42f8-8997-dd782f454e0c',3,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('7c9d271c-a1b9-4829-87e9-345f3fb3cc08',5,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('c63bf6f5-7ea1-4f97-b495-7dd370cc1452',5,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('7040bbff-a924-49f5-8e31-8a82626f0e6b',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('797e7511-0dd5-42ca-b39c-7709d1255c6a',1,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('f892087e-a4c6-4d8d-8a65-1f391b1272d2',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('2756185b-2eb6-4e9a-a1d1-2e2dfccd3fdb',4,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('fdf3a036-db43-436b-a258-9ba0c52ec280',2,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('78b540a8-b612-4dc1-8753-e88f954f05d9',1,3,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('b49a2942-6381-4e57-8d55-d037b7b81166',5,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('49e66802-6c09-48ee-9396-6170b8dc686e',1,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('ae0a3ae8-efc7-4f78-b828-4ed13bb5fd7b',5,1,'99f31573-2e0b-4e45-b561-eee730cc17f6'),('d18224e9-a1b4-4ccf-877a-588ae684504d',5,1,'99f31573-2e0b-4e45-b561-eee730cc17f6');
+/*!40000 ALTER TABLE `roll` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `simulation`
+--
+
+LOCK TABLES `simulation` WRITE;
+/*!40000 ALTER TABLE `simulation` DISABLE KEYS */;
+INSERT INTO `simulation` VALUES ('fa5a2d45-ab82-466b-9301-39de35de24d9','Dry Simulation',2,0,1),('e01ead2b-0a6f-42e7-a5e0-bef0ce6b8c71','Dry Simulation 2',2,0,1),('d02d31a2-ab8b-4cb1-99ea-27d9e8b9ef22','Dry Simulation 3',2,0,1);
+/*!40000 ALTER TABLE `simulation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `simulation_player`
+--
+
+LOCK TABLES `simulation_player` WRITE;
+/*!40000 ALTER TABLE `simulation_player` DISABLE KEYS */;
+INSERT INTO `simulation_player` VALUES ('fa5a2d45-ab82-466b-9301-39de35de24d9',1),('fa5a2d45-ab82-466b-9301-39de35de24d9',2),('e01ead2b-0a6f-42e7-a5e0-bef0ce6b8c71',1),('e01ead2b-0a6f-42e7-a5e0-bef0ce6b8c71',2),('d02d31a2-ab8b-4cb1-99ea-27d9e8b9ef22',1),('d02d31a2-ab8b-4cb1-99ea-27d9e8b9ef22',2);
+/*!40000 ALTER TABLE `simulation_player` ENABLE KEYS */;
+UNLOCK TABLES;

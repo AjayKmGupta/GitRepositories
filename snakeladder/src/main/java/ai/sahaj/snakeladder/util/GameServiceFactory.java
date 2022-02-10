@@ -10,21 +10,33 @@ import ai.sahaj.snakeladder.services.GameService;
 @Component
 public class GameServiceFactory {
 
+	private GameService autoModeGameService;
+
+	private GameService manualModeGameService;
+
 	@Qualifier("autoModeGameService")
 	@Autowired
-	private GameService autoModeGameService;
+	public void setAutoModeGameService(GameService autoModeGameService) {
+		this.autoModeGameService = autoModeGameService;
+	}
+
 	@Qualifier("manualModeGameService")
 	@Autowired
-	private GameService manualModeGameService;
+	public void setManualModeGameService(GameService manualModeGameService) {
+		this.manualModeGameService = manualModeGameService;
+	}
 
 	public GameService getGameService(SimulationMode simulationMode) {
 		GameService gameService = null;
 		switch (simulationMode) {
-			case AUTO:
-				gameService = autoModeGameService;
-				break;
-			case MANUAL:
-				gameService = manualModeGameService;
+		case AUTO:
+			gameService = autoModeGameService;
+			break;
+		case MANUAL:
+			gameService = manualModeGameService;
+			break;
+		default:
+			gameService = autoModeGameService;
 		}
 		return gameService;
 	}

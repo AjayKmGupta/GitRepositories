@@ -6,7 +6,7 @@ import ai.sahaj.snakeladder.entity.Roll;
 
 public interface RollService {
 
-	Roll roll();
+	Roll roll(DiceService diceService);
 
 	void saveAllRolls(List<Roll> rolls);
 

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -19,8 +20,9 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String emailId;
+	@ToString.Exclude
 	@ManyToMany(mappedBy = "players")
 	private List<Simulation> simulation;
 }

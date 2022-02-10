@@ -1,23 +1,23 @@
 package ai.sahaj.snakeladder.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import ai.sahaj.snakeladder.constants.SnakeLadderConstants;
-import ai.sahaj.snakeladder.dto.backend.SimulationDataDto;
+import ai.sahaj.snakeladder.dto.backend.TrackGameMovement;
 import ai.sahaj.snakeladder.dto.backend.TrackMovement;
+import ai.sahaj.snakeladder.entity.Game;
 import ai.sahaj.snakeladder.entity.Player;
 import ai.sahaj.snakeladder.entity.Roll;
 import ai.sahaj.snakeladder.entity.Simulation;
-import ai.sahaj.snakeladder.services.GameService;
+import ai.sahaj.snakeladder.services.DiceService;
 import ai.sahaj.snakeladder.services.PositionCalculatorService;
 import ai.sahaj.snakeladder.services.RollService;
 
-@Service("autoModeGameService")
-public class AutoModeGameServiceImpl implements GameService {
+public class AutoModeGameServiceImpl extends GameServiceImpl {
 
 	@Autowired
 	private RollService rollService;
@@ -25,19 +25,17 @@ public class AutoModeGameServiceImpl implements GameService {
 	private PositionCalculatorService posCalService;
 
 	@Override
-	public SimulationDataDto play(Simulation simulation) {
-		SimulationDataDto simulationDataDto = new SimulationDataDto();
+	public TrackGameMovement play(Simulation simulation, Game game, DiceService diceServie) {
 		boolean anyWinner = false;
 		List<Roll> rolls = new ArrayList<>();
-		List<TrackMovement> trackMovements = initializePlayersPosition(simulation.getPlayers());
+		TrackGameMovement trackGameMovement = initializeGameMovements(simulation.getPlayers(), game);
 		Player winner = null;
 		while (!anyWinner) {
 			int count = 0;
 			for (Player player : simulation.getPlayers()) {
-				Roll roll = rollService.roll();
-				TrackMovement trackMovement = trackMovements.get(count);
-				posCalService.updateMovement(trackMovement, roll, simulation.getBoard());
-				roll.setSimulation(simulation);
+				Roll roll = rollService.roll(diceServie);
+				TrackMovement trackMovement = posCalService.updateMovement(trackGameMovement, count, roll);
+				roll.setGame(game);
 				rolls.add(roll);
 				anyWinner = isWinner(trackMovement);
 				if (anyWinner) {
@@ -47,16 +45,14 @@ public class AutoModeGameServiceImpl implements GameService {
 				count++;
 			}
 		}
-		simulationDataDto.setWinner(winner);
-		simulationDataDto.setRolls(rolls);
-		return simulationDataDto;
+		game.setWinner(winner);
+		trackGameMovement.setRolls(rolls);
+		return trackGameMovement;
 	}
 
-	private boolean isWinner(TrackMovement trackMovement) {
-		return trackMovement.getPosition().getNumber() == SnakeLadderConstants.BOARD_FINAL_POS;
-	}
+	private TrackGameMovement initializeGameMovements(List<Player> playersList, Game game) {
 
-	private List<TrackMovement> initializePlayersPosition(List<Player> playersList) {
+		TrackGameMovement trackGameMovement = new TrackGameMovement();
 		List<TrackMovement> trackMovements = new ArrayList<>();
 
 		for (Player player : playersList) {
@@ -64,7 +60,14 @@ public class AutoModeGameServiceImpl implements GameService {
 			trackMovement.setPlayer(player);
 			trackMovements.add(trackMovement);
 		}
-		return trackMovements;
+		trackGameMovement.setTrackMovement(trackMovements);
+		trackGameMovement.setGameAccsOrDeaccs(new HashSet<>());
+		trackGameMovement.setGame(game);
+		return trackGameMovement;
+	}
+
+	private boolean isWinner(TrackMovement trackMovement) {
+		return trackMovement.getPosition().getNumber() == SnakeLadderConstants.BOARD_FINAL_POS;
 	}
 
 }

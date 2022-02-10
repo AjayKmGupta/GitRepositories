@@ -1,0 +1,7 @@
+package ai.sahaj.snakeladder.constants;
+
+public enum Stats {
+
+	RTWMIN, RTWMAX, RTWAVG, AOCMIN, AOCMAX, AOCAVG, AOSMIN, AOSMAX, AOSAVG, BCINST, BSINST, LONGTN, ULRMIN, ULRMAX,
+	ULRAVG, LKRMIN, LKRMAX, LKRAVG
+}

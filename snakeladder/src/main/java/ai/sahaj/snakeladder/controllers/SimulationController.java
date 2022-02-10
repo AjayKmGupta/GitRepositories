@@ -74,9 +74,9 @@ public class SimulationController {
 	@ApiOperation(value = "Start the given simulation.", response = HttpStatus.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully started"),
 			@ApiResponse(code = 404, message = "Not found") })
-	@PostMapping("/start/{simulation-id}")
+	@PostMapping("/start/automated/{simulation-id}")
 	public ResponseEntity<String> startSimulation(@PathVariable("simulation-id") String simulationId) {
-		String mesage = simulationService.startSimulation(simulationId);
+		String mesage = simulationService.startAutomatedSimulation(simulationId);
 		return new ResponseEntity<>(mesage, HttpStatus.OK);
 	}
 }

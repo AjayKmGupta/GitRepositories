@@ -1,21 +1,25 @@
 package ai.sahaj.snakeladder.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import ai.sahaj.snakeladder.dto.backend.SimulationDataDto;
+import ai.sahaj.snakeladder.dto.backend.TrackGameMovement;
 import ai.sahaj.snakeladder.dto.frontend.AddSimulationDto;
 import ai.sahaj.snakeladder.dto.frontend.PlayerDto;
 import ai.sahaj.snakeladder.dto.frontend.SimulationDto;
 import ai.sahaj.snakeladder.entity.Board;
+import ai.sahaj.snakeladder.entity.Game;
 import ai.sahaj.snakeladder.entity.Player;
 import ai.sahaj.snakeladder.entity.Simulation;
 import ai.sahaj.snakeladder.exceptions.BadRequestException;
@@ -23,9 +27,13 @@ import ai.sahaj.snakeladder.exceptions.ConflictException;
 import ai.sahaj.snakeladder.exceptions.ResourceNotFoundException;
 import ai.sahaj.snakeladder.repositories.SimulationRepository;
 import ai.sahaj.snakeladder.services.BoardService;
+import ai.sahaj.snakeladder.services.DiceService;
+import ai.sahaj.snakeladder.services.GameAccOrDeaccleratorService;
+import ai.sahaj.snakeladder.services.GameService;
 import ai.sahaj.snakeladder.services.PlayersService;
 import ai.sahaj.snakeladder.services.RollService;
 import ai.sahaj.snakeladder.services.SimulationService;
+import ai.sahaj.snakeladder.util.DiceServiceFactory;
 import ai.sahaj.snakeladder.util.GameServiceFactory;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +50,13 @@ public class SimulationServiceImpl implements SimulationService {
 	@Autowired
 	private RollService rollService;
 	@Autowired
+	private GameAccOrDeaccleratorService gameAccOrDeaccService;
+	@Autowired
+	private GameService gameService;
+	@Autowired
 	private GameServiceFactory gameServiceFactory;
+	@Autowired
+	private DiceServiceFactory diceServiceFactory;
 
 	@Override
 	public void addSimulation(AddSimulationDto simulationDto) {
@@ -64,7 +78,7 @@ public class SimulationServiceImpl implements SimulationService {
 		}
 		checkIfSimulationAlreadyExists(simulationDto, simulationId);
 		Simulation simulation = optSimulation.get();
-		if (!CollectionUtils.isEmpty(simulation.getRolls())) {
+		if (!CollectionUtils.isEmpty(simulation.getGames())) {
 			throw new BadRequestException("Executed simulations can't be updated");
 		}
 		BeanUtils.copyProperties(simulationDto, simulation);
@@ -129,20 +143,28 @@ public class SimulationServiceImpl implements SimulationService {
 				.collect(Collectors.toSet());
 	}
 
+	@Transactional
 	@Override
-	public String startSimulation(String simulationId) {
+	public String startAutomatedSimulation(String simulationId) {
 		Optional<Simulation> optSimulation = simulationRepo.findById(simulationId);
 		if (optSimulation.isEmpty()) {
 			throw new ResourceNotFoundException("The given simulation doesn't exist");
 		}
-		if (!CollectionUtils.isEmpty(optSimulation.get().getRolls())) {
+		if (!CollectionUtils.isEmpty(optSimulation.get().getGames())) {
 			throw new ConflictException("Simulations are already done for it");
 		}
 		for (int i = 0; i < optSimulation.get().getSimulationCount(); i++) {
-			SimulationDataDto simulationDataDto = gameServiceFactory
-					.getGameService(optSimulation.get().getSimulationMode()).play(optSimulation.get());
-			log.info("Winner is: {}", simulationDataDto.getWinner().getName());
-			rollService.saveAllRolls(simulationDataDto.getRolls());
+			Game game = new Game();
+			game.setId(UUID.randomUUID().toString());
+			game.setSimulation(optSimulation.get());
+			DiceService diceService = diceServiceFactory.getDiceService(optSimulation.get().getSimulationMode());
+			TrackGameMovement trackGameMovement = gameServiceFactory
+					.getGameService(optSimulation.get().getSimulationMode())
+					.play(optSimulation.get(), game, diceService);
+			log.info("Winner is: {}", game.getWinner().getName());
+			gameService.saveGame(game);
+			gameAccOrDeaccService.saveAll(new ArrayList<>(trackGameMovement.getGameAccsOrDeaccs()));
+			rollService.saveAllRolls(trackGameMovement.getRolls());
 		}
 		return "Simulation completed successfully";
 	}

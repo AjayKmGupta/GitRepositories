@@ -1,6 +1,6 @@
 package ai.sahaj.snakeladder.dto.frontend;
 
-import java.util.Set;
+import java.util.List;
 
 import ai.sahaj.snakeladder.constants.SimulationMode;
 import lombok.Data;
@@ -12,5 +12,5 @@ public class AddSimulationDto {
 	private SimulationMode simulationMode;
 	private int simulationCount;
 	private SimulationAPIBoardDto board;
-	private Set<PlayerDto> players;
+	private List<PlayerDto> players;
 }

@@ -1,14 +1,16 @@
 package ai.sahaj.snakeladder.services.impl;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ai.sahaj.snakeladder.dto.backend.Dice;
+import ai.sahaj.snakeladder.dto.backend.TrackGameMovement;
 import ai.sahaj.snakeladder.dto.backend.TrackMovement;
 import ai.sahaj.snakeladder.entity.AccOrDeaccelerator;
-import ai.sahaj.snakeladder.entity.Board;
+import ai.sahaj.snakeladder.entity.GameAccOrDeacclerator;
 import ai.sahaj.snakeladder.entity.Position;
 import ai.sahaj.snakeladder.entity.Roll;
 import ai.sahaj.snakeladder.services.AccOrDeacceleratorService;
@@ -27,16 +29,21 @@ public class PositionCalculatorServiceImpl implements PositionCalculatorService 
 	private PositionService posService;
 
 	@Override
-	public void updateMovement(TrackMovement trackMovement, Roll roll, Board board) {
+	public TrackMovement updateMovement(TrackGameMovement trackGameMovement, int count, Roll roll) {
+
+		TrackMovement trackMovement = trackGameMovement.getTrackMovement().get(count);
 
 		int currentPos = trackMovement.getPosition() == null ? 0 : trackMovement.getPosition().getNumber();
 		int posToBeMoved = currentPos + (roll.getNoOfRolls() - 1) * Dice.MAX_VAL + roll.getFaceValue();
 		Optional<Position> optPos = posService.getPositionByValue(posToBeMoved);
 		if (optPos.isPresent()) {
-			Optional<AccOrDeaccelerator> accOrDeaccStartPos = accOrDeaccService
-					.getAccOrDeaccByStartPosition(optPos.get());
-			if (accOrDeaccStartPos.isPresent()) {
-				int accOrDeaccVal = getAcceleratedOrDeaccVal(accOrDeaccStartPos.get());
+			Optional<AccOrDeaccelerator> accOrDeacc = accOrDeaccService.getAccOrDeaccByStartPosition(optPos.get());
+			if (accOrDeacc.isPresent()) {
+				log.debug("Logging snake or ladder: {}", accOrDeacc.get());
+				GameAccOrDeacclerator gameAccOrDeacc = new GameAccOrDeacclerator(UUID.randomUUID().toString(),
+						trackGameMovement.getGame(), accOrDeacc.get());
+				trackGameMovement.getGameAccsOrDeaccs().add(gameAccOrDeacc);
+				int accOrDeaccVal = getAcceleratedOrDeaccVal(accOrDeacc.get());
 				int effPosToBeMoved = posToBeMoved + accOrDeaccVal;
 				Optional<Position> optEffPos = posService.getPositionByValue(effPosToBeMoved);
 				if (optEffPos.isPresent()) {
@@ -46,7 +53,9 @@ public class PositionCalculatorServiceImpl implements PositionCalculatorService 
 				trackMovement.setPosition(optPos.get());
 			}
 		}
-		log.info("Updated positions: {} for player: {}", trackMovement.getPosition().getNumber(), trackMovement.getPlayer().getName());
+		log.debug("Updated positions: {} for player: {}", trackMovement.getPosition().getNumber(),
+				trackMovement.getPlayer().getName());
+		return trackMovement;
 	}
 
 	private int getAcceleratedOrDeaccVal(AccOrDeaccelerator accOrDeaccelerator) {

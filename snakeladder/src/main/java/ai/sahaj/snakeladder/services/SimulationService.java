@@ -13,7 +13,7 @@ public interface SimulationService {
 
 	SimulationDto getSimulation(String simulationId);
 
-	String startSimulation(String simulationId);
+	String startAutomatedSimulation(String simulationId);
 
 	Set<SimulationDto> getSimulation();
 }
