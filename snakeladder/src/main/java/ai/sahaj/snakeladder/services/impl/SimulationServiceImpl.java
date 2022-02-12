@@ -169,4 +169,9 @@ public class SimulationServiceImpl implements SimulationService {
 		return "Simulation completed successfully";
 	}
 
+	@Override
+	public Optional<Simulation> getSimulationEntity(String simulationId) {
+		return simulationRepo.findById(simulationId);
+	}
+
 }

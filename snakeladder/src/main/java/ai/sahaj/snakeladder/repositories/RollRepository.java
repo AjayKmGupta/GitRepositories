@@ -18,4 +18,6 @@ public interface RollRepository extends JpaRepository<Roll, String> {
 	@Query(value = "select * from roll as r inner join game g on r.game_id = g.id where ((r.no_of_rolls - 1) * 6 + r.face_value) = (select max(((ro.no_of_rolls - 1) * 6 + ro.face_value )) from roll ro) and g.simulation_id=:simulationId", nativeQuery = true)
 	List<Roll> getLongestTurnRoll(String simulationId);
 
+	@Query(value = "select * from roll as r inner join game g on r.game_id = g.id where r.roll_type =:rollType and g.simulation_id =:simulationId", nativeQuery = true)
+	List<Roll> getLuckyOrUnluckyRolls(String simulationId, int rollType);
 }

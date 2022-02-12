@@ -9,5 +9,6 @@ public class TrackMovement {
 
 	private Player player;
 	private Position position;
+	private int winLuckyThrsldCount;
 
 }

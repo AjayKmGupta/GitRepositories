@@ -4,8 +4,7 @@ import ai.sahaj.snakeladder.constants.Stats;
 import lombok.Data;
 
 @Data
-public class StatsRequest {
+public class MetricRequest {
 
 	private Stats metricName;
-	private String simulationId;
 }

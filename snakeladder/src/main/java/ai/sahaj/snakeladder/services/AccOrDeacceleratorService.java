@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import ai.sahaj.snakeladder.constants.AccOrDeacceleratorType;
+import ai.sahaj.snakeladder.dto.backend.TakenAccOrDeAccDiff;
 import ai.sahaj.snakeladder.dto.frontend.AccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.dto.frontend.AddAccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.entity.AccOrDeaccelerator;
@@ -24,5 +26,9 @@ public interface AccOrDeacceleratorService {
 	List<AccOrDeaccelerator> getAllAccOrDeaccelerators();
 
 	Set<AccOrDeacceleratorDto> getAccOrDeaccDtosFromAccOrDeacc(List<AccOrDeaccelerator> accOrDeaccs);
+
+	List<AccOrDeaccelerator> getVicinityAccOrDeaccByStartPosition(Position position, AccOrDeacceleratorType accOrDeaccType);
+
+	List<TakenAccOrDeAccDiff> getSimulationWiseSnakeOrLadderTaken(String simulationId, AccOrDeacceleratorType accOrDeaccType);
 
 }

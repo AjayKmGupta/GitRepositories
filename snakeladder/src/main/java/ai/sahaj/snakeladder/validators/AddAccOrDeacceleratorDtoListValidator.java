@@ -20,6 +20,7 @@ public class AddAccOrDeacceleratorDtoListValidator implements Validator {
 		return List.class.isAssignableFrom(clazz);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void validate(Object target, Errors errors) {
 

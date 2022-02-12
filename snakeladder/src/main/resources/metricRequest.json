@@ -1,0 +1,55 @@
+[{
+		"metricName": "RTWAVG"
+	},
+	{
+		"metricName": "RTWMAX"
+	},
+	{
+		"metricName": "RTWMIN"
+	},
+	{
+		"metricName": "AOCAVG"
+	},
+	{
+		"metricName": "AOCMAX"
+	},
+	{
+		"metricName": "AOCMIN"
+	},
+	{
+		"metricName": "AOSMAX"
+	},
+	{
+		"metricName": "AOSAVG"
+	},
+	{
+		"metricName": "AOSMIN"
+	},
+	{
+		"metricName": "BCINST"
+	},
+	{
+		"metricName": "BSINST"
+	},
+	{
+		"metricName": "LONGTN"
+	},
+	{
+		"metricName": "ULRAVG"
+	},
+	{
+		"metricName": "ULRMAX"
+	},
+	{
+		"metricName": "ULRMIN"
+	},
+	{
+		"metricName": "LKRAVG"
+	},
+	{
+		"metricName": "LKRMAX"
+	},
+	{
+		"metricName": "LKRMIN"
+	}
+]

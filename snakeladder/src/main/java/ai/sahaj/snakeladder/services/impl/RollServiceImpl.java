@@ -6,7 +6,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ai.sahaj.snakeladder.constants.RollType;
 import ai.sahaj.snakeladder.dto.backend.Dice;
+import ai.sahaj.snakeladder.dto.backend.RollStats;
 import ai.sahaj.snakeladder.entity.Roll;
 import ai.sahaj.snakeladder.repositories.RollRepository;
 import ai.sahaj.snakeladder.services.DiceService;
@@ -36,6 +38,21 @@ public class RollServiceImpl implements RollService {
 	@Override
 	public void saveAllRolls(List<Roll> rolls) {
 		rollRepo.saveAll(rolls);
+	}
+
+	@Override
+	public List<Roll> getLongestTurnRoll(String simulationId) {
+		return rollRepo.getLongestTurnRoll(simulationId);
+	}
+
+	@Override
+	public List<RollStats> getGameWiseRolls(String simulationId) {
+		return rollRepo.getGameWiseRolls(simulationId);
+	}
+
+	@Override
+	public List<Roll> getLuckyOrUnluckyRolls(String simulationId, RollType rollType) {
+		return rollRepo.getLuckyOrUnluckyRolls(simulationId, rollType.ordinal());
 	}
 
 }

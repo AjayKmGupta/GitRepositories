@@ -14,6 +14,7 @@ import ai.sahaj.snakeladder.entity.Player;
 import ai.sahaj.snakeladder.entity.Roll;
 import ai.sahaj.snakeladder.entity.Simulation;
 import ai.sahaj.snakeladder.services.DiceService;
+import ai.sahaj.snakeladder.services.LuckyUnluckyRollService;
 import ai.sahaj.snakeladder.services.PositionCalculatorService;
 import ai.sahaj.snakeladder.services.RollService;
 
@@ -23,6 +24,8 @@ public class AutoModeGameServiceImpl extends GameServiceImpl {
 	private RollService rollService;
 	@Autowired
 	private PositionCalculatorService posCalService;
+	@Autowired
+	private LuckyUnluckyRollService luckyUnluckyRollService;
 
 	@Override
 	public TrackGameMovement play(Simulation simulation, Game game, DiceService diceServie) {
@@ -39,6 +42,7 @@ public class AutoModeGameServiceImpl extends GameServiceImpl {
 				rolls.add(roll);
 				anyWinner = isWinner(trackMovement);
 				if (anyWinner) {
+					luckyUnluckyRollService.setLuckyOrUnluckyRoll(trackMovement, roll);
 					winner = player;
 					break;
 				}

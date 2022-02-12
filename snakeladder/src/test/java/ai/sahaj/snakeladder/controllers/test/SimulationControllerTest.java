@@ -93,15 +93,13 @@ class SimulationControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
-	/*
-	 * @Test void testStartSimulation() throws JsonProcessingException, Exception {
-	 * String message = "Simulation started";
-	 * Mockito.when(simulationService.startSimulation("123")).thenReturn(message);
-	 * mockMvc.perform(MockMvcRequestBuilders.post(
-	 * "/simulation/start/{simulation-id}", "123")
-	 * .contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(
-	 * MockMvcResultMatchers.status().isOk()); }
-	 */
+	@Test
+	void testStartSimulation() throws JsonProcessingException, Exception {
+		String message = "Simulation started";
+		Mockito.when(simulationService.startAutomatedSimulation("123")).thenReturn(message);
+		mockMvc.perform(MockMvcRequestBuilders.post("/simulation/start/automated/{simulation-id}", "123")
+				.contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(MockMvcResultMatchers.status().isOk());
+	}
 
 	public static class ContextConfig {
 		@Bean

@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import ai.sahaj.snakeladder.constants.RollType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -16,6 +17,7 @@ public class Roll {
 
 	@Id
 	private String id;
+	private RollType rollType;
 	private int noOfRolls;
 	private int faceValue;
 	@ToString.Exclude

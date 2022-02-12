@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ai.sahaj.snakeladder.constants.AccOrDeacceleratorType;
+import ai.sahaj.snakeladder.dto.backend.TakenAccOrDeAccDiff;
 import ai.sahaj.snakeladder.dto.frontend.AccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.dto.frontend.AddAccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.dto.frontend.PositionDto;
@@ -155,6 +156,19 @@ public class AccOrDeacceleratorServiceImpl implements AccOrDeacceleratorService 
 	@Override
 	public Optional<AccOrDeaccelerator> getAccOrDeaccByStartPosition(Position position) {
 		return accOrDeaccRepo.findByStartPos(position);
+	}
+
+	@Override
+	public List<AccOrDeaccelerator> getVicinityAccOrDeaccByStartPosition(Position position,
+			AccOrDeacceleratorType accOrDeaccType) {
+		return accOrDeaccRepo.findByVicinityStartPos(position.getNumber() - 2, position.getNumber() + 2,
+				accOrDeaccType.ordinal());
+	}
+
+	@Override
+	public List<TakenAccOrDeAccDiff> getSimulationWiseSnakeOrLadderTaken(String simulationId,
+			AccOrDeacceleratorType accOrDeaccType) {
+		return accOrDeaccRepo.getSimulationWiseSnakeOrLadderTaken(simulationId, accOrDeaccType.ordinal());
 	}
 
 }
