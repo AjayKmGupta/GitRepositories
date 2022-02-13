@@ -28,7 +28,7 @@ public class AutoModeGameServiceImpl extends GameServiceImpl {
 	private LuckyUnluckyRollService luckyUnluckyRollService;
 
 	@Override
-	public TrackGameMovement play(Simulation simulation, Game game, DiceService diceServie) {
+	public TrackGameMovement play(Simulation simulation, Game game, DiceService diceService) {
 		boolean anyWinner = false;
 		List<Roll> rolls = new ArrayList<>();
 		TrackGameMovement trackGameMovement = initializeGameMovements(simulation.getPlayers(), game);
@@ -36,7 +36,7 @@ public class AutoModeGameServiceImpl extends GameServiceImpl {
 		while (!anyWinner) {
 			int count = 0;
 			for (Player player : simulation.getPlayers()) {
-				Roll roll = rollService.roll(diceServie);
+				Roll roll = rollService.roll(diceService);
 				TrackMovement trackMovement = posCalService.updateMovement(trackGameMovement, count, roll);
 				roll.setGame(game);
 				rolls.add(roll);

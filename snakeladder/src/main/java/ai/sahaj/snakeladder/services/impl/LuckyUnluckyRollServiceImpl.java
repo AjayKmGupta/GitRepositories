@@ -14,7 +14,7 @@ import ai.sahaj.snakeladder.services.LuckyUnluckyRollService;
 public class LuckyUnluckyRollServiceImpl implements LuckyUnluckyRollService {
 
 	@Override
-	public void setLuckyOrUnluckyPositionThreshold(int posToBeMoved, TrackMovement trackMovement) {
+	public void setLuckyOrUnluckyPositionThresholdCount(int posToBeMoved, TrackMovement trackMovement) {
 		if (posToBeMoved >= SnakeLadderConstants.BOARD_LUCKY_THRESHOLD
 				&& posToBeMoved <= SnakeLadderConstants.BOARD_FINAL_POS) {
 			trackMovement.setWinLuckyThrsldCount(trackMovement.getWinLuckyThrsldCount() + 1);

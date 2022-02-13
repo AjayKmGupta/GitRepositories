@@ -6,7 +6,7 @@ import ai.sahaj.snakeladder.entity.Roll;
 
 public interface LuckyUnluckyRollService {
 
-	void setLuckyOrUnluckyPositionThreshold(int posToBeMoved, TrackMovement trackMovement);
+	void setLuckyOrUnluckyPositionThresholdCount(int posToBeMoved, TrackMovement trackMovement);
 
 	void setLuckyOrUnluckyRoll(AccOrDeaccelerator accOrDeacc, Roll roll);
 

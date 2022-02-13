@@ -31,7 +31,7 @@ public class RollServiceImpl implements RollService {
 			roll.setNoOfRolls(roll.getNoOfRolls() + 1);
 			roll.setFaceValue(dice.getFaceValue());
 		}
-		log.info("Roll value for this turn: {}", roll);
+		log.debug("Roll value for this turn: {}", roll);
 		return roll;
 	}
 

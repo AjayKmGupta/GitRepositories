@@ -42,7 +42,7 @@ public class PositionCalculatorServiceImpl implements PositionCalculatorService 
 		int currentPos = trackMovement.getPosition() == null ? 0 : trackMovement.getPosition().getNumber();
 		int posToBeMoved = currentPos + (roll.getNoOfRolls() - 1) * Dice.MAX_VAL + roll.getFaceValue();
 		Optional<Position> optPos = posService.getPositionByValue(posToBeMoved);
-		luckyOrUnluckyRollService.setLuckyOrUnluckyPositionThreshold(posToBeMoved, trackMovement);
+		luckyOrUnluckyRollService.setLuckyOrUnluckyPositionThresholdCount(posToBeMoved, trackMovement);
 		if (optPos.isPresent()) {
 			Optional<AccOrDeaccelerator> accOrDeacc = accOrDeaccService.getAccOrDeaccByStartPosition(optPos.get());
 			if (accOrDeacc.isPresent()) {
@@ -54,7 +54,7 @@ public class PositionCalculatorServiceImpl implements PositionCalculatorService 
 				luckyOrUnluckyRollService.setLuckyOrUnluckyRoll(accOrDeacc.get(), roll);
 				int effPosToBeMoved = posToBeMoved + accOrDeaccVal;
 				Optional<Position> optEffPos = posService.getPositionByValue(effPosToBeMoved);
-				luckyOrUnluckyRollService.setLuckyOrUnluckyPositionThreshold(effPosToBeMoved, trackMovement);
+				luckyOrUnluckyRollService.setLuckyOrUnluckyPositionThresholdCount(effPosToBeMoved, trackMovement);
 				if (optEffPos.isPresent()) {
 					trackMovement.setPosition(optEffPos.get());
 				}

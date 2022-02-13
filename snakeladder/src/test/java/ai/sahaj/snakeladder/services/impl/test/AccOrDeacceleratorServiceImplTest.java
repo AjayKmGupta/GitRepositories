@@ -18,6 +18,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ai.sahaj.snakeladder.constants.AccOrDeacceleratorType;
+import ai.sahaj.snakeladder.dto.backend.TakenAccOrDeAccDiff;
 import ai.sahaj.snakeladder.dto.frontend.AccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.dto.frontend.AddAccOrDeacceleratorDto;
 import ai.sahaj.snakeladder.dto.frontend.AddPositionDto;
@@ -45,14 +46,17 @@ class AccOrDeacceleratorServiceImplTest {
 
 	@Test
 	void testAddAccOrDeaccelerator() {
+
+		List<AccOrDeaccelerator> accOrDeaccs = TestUtil.getAccOrDeaccs();
+
 		List<AddAccOrDeacceleratorDto> accOrDeaccDtos = new ArrayList<>();
 		AddAccOrDeacceleratorDto addAccOrDeaccDto1 = new AddAccOrDeacceleratorDto();
 		addAccOrDeaccDto1.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
 		AddPositionDto startPosDto1 = new AddPositionDto();
-		startPosDto1.setNumber(34);
+		startPosDto1.setNumber(39);
 		addAccOrDeaccDto1.setStartPos(startPosDto1);
 		AddPositionDto finalPosDto1 = new AddPositionDto();
-		finalPosDto1.setNumber(13);
+		finalPosDto1.setNumber(18);
 		addAccOrDeaccDto1.setFinalPosition(finalPosDto1);
 		AddAccOrDeacceleratorDto addAccOrDeaccDto2 = new AddAccOrDeacceleratorDto();
 		addAccOrDeaccDto2.setAccOrDeAccType(AccOrDeacceleratorType.LADDER);
@@ -66,10 +70,41 @@ class AccOrDeacceleratorServiceImplTest {
 		accOrDeaccDtos.add(addAccOrDeaccDto1);
 		accOrDeaccDtos.add(addAccOrDeaccDto2);
 
-		Mockito.when(accOrDeaccRepo.findAll()).thenReturn(new ArrayList<AccOrDeaccelerator>());
+		Mockito.when(accOrDeaccRepo.findAll()).thenReturn(accOrDeaccs);
 		Mockito.when(posService.getPositions()).thenReturn(TestUtil.getAllPositions());
 		accOrDeaccService.addAccOrDeaccelerator(accOrDeaccDtos);
 		Mockito.verify(accOrDeaccRepo).findAll();
+	}
+
+	@Test
+	void testAddAccOrDeacceleratorWithNullDto() {
+
+		List<AccOrDeaccelerator> accOrDeaccs = TestUtil.getAccOrDeaccs();
+
+		List<AddAccOrDeacceleratorDto> accOrDeaccDtos = new ArrayList<>();
+		AddAccOrDeacceleratorDto addAccOrDeaccDto1 = new AddAccOrDeacceleratorDto();
+		addAccOrDeaccDto1.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
+		AddPositionDto startPosDto1 = new AddPositionDto();
+		startPosDto1.setNumber(39);
+		addAccOrDeaccDto1.setStartPos(startPosDto1);
+		AddPositionDto finalPosDto1 = new AddPositionDto();
+		finalPosDto1.setNumber(18);
+		addAccOrDeaccDto1.setFinalPosition(finalPosDto1);
+		AddAccOrDeacceleratorDto addAccOrDeaccDto2 = new AddAccOrDeacceleratorDto();
+		addAccOrDeaccDto2.setAccOrDeAccType(AccOrDeacceleratorType.LADDER);
+		AddPositionDto startPosDto2 = new AddPositionDto();
+		startPosDto2.setNumber(4);
+		addAccOrDeaccDto2.setStartPos(startPosDto2);
+
+		accOrDeaccDtos.add(addAccOrDeaccDto1);
+		accOrDeaccDtos.add(addAccOrDeaccDto2);
+
+		Mockito.when(accOrDeaccRepo.findAll()).thenReturn(accOrDeaccs);
+		Mockito.when(posService.getPositions()).thenReturn(TestUtil.getAllPositions());
+		BadRequestException thrown = assertThrows(BadRequestException.class, () -> {
+			accOrDeaccService.addAccOrDeaccelerator(accOrDeaccDtos);
+		});
+		assertEquals("All accelerators and its positions are required", thrown.getMessage());
 	}
 
 	@Test
@@ -325,6 +360,67 @@ class AccOrDeacceleratorServiceImplTest {
 	}
 
 	@Test
+	void testUpdateAccOrDeacceleratorWithPositionNotFound() {
+		AddAccOrDeacceleratorDto addAccOrDeaccDto = new AddAccOrDeacceleratorDto();
+		addAccOrDeaccDto.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
+		AddPositionDto startPosDto = new AddPositionDto();
+		startPosDto.setNumber(34);
+		addAccOrDeaccDto.setStartPos(startPosDto);
+		AddPositionDto finalPosDto = new AddPositionDto();
+		finalPosDto.setNumber(13);
+		addAccOrDeaccDto.setFinalPosition(finalPosDto);
+
+		AccOrDeaccelerator accOrDeacc = new AccOrDeaccelerator();
+		accOrDeacc.setId(123);
+		accOrDeacc.setAccOrDeAccType(AccOrDeacceleratorType.LADDER);
+		Position startPos = new Position();
+		startPos.setNumber(4);
+		accOrDeacc.setStartPos(startPos);
+		Position finalPos = new Position();
+		finalPos.setNumber(25);
+		accOrDeacc.setFinalPosition(finalPos);
+
+		List<Position> positions = TestUtil.getAllPositions();
+		Position pos = new Position();
+		pos.setId(34);
+		pos.setNumber(34);
+		positions.remove(pos);
+
+		Mockito.when(accOrDeaccRepo.findById(123)).thenReturn(Optional.of(accOrDeacc));
+		Mockito.when(posService.getPositions()).thenReturn(positions);
+		ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
+			accOrDeaccService.updateAccOrDeaccelerator("123", addAccOrDeaccDto);
+		});
+		assertEquals("The given position doesn't exists", thrown.getMessage());
+	}
+
+	@Test
+	void testUpdateAccOrDeacceleratorWithNullDto() {
+		AddAccOrDeacceleratorDto addAccOrDeaccDto = new AddAccOrDeacceleratorDto();
+		addAccOrDeaccDto.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
+		AddPositionDto startPosDto = new AddPositionDto();
+		startPosDto.setNumber(34);
+		addAccOrDeaccDto.setStartPos(startPosDto);
+
+		AccOrDeaccelerator accOrDeacc = new AccOrDeaccelerator();
+		accOrDeacc.setId(123);
+		accOrDeacc.setAccOrDeAccType(AccOrDeacceleratorType.LADDER);
+		Position startPos = new Position();
+		startPos.setNumber(4);
+		accOrDeacc.setStartPos(startPos);
+		Position finalPos = new Position();
+		finalPos.setNumber(25);
+		accOrDeacc.setFinalPosition(finalPos);
+
+		Mockito.when(accOrDeaccRepo.findById(123)).thenReturn(Optional.of(accOrDeacc));
+		Mockito.when(posService.getPositions()).thenReturn(TestUtil.getAllPositions());
+		BadRequestException thrown = assertThrows(BadRequestException.class, () -> {
+			accOrDeaccService.updateAccOrDeaccelerator("123", addAccOrDeaccDto);
+		});
+		assertEquals("All accelerators and its positions are required", thrown.getMessage());
+	}
+
+	@Test
 	void testGetAccOrDeacceleratorByBoardId() {
 
 		List<AccOrDeaccelerator> accOrDeaccs = new ArrayList<>();
@@ -396,6 +492,43 @@ class AccOrDeacceleratorServiceImplTest {
 		Mockito.when(accOrDeaccRepo.findByStartPos(startPos1)).thenReturn(Optional.of(accOrDeacc));
 		Optional<AccOrDeaccelerator> optAccOrDeacc = accOrDeaccService.getAccOrDeaccByStartPosition(startPos1);
 		assertTrue(optAccOrDeacc.isPresent());
+	}
+
+	@Test
+	void testGetVicinityAccOrDeaccByStartPosition() {
+
+		Position position = new Position(35);
+		List<AccOrDeaccelerator> expectedAccOrDeaccs = new ArrayList<>();
+		AccOrDeaccelerator accOrDeacc = new AccOrDeaccelerator();
+		accOrDeacc.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
+		accOrDeacc.setStartPos(new Position(36));
+		accOrDeacc.setFinalPosition(new Position(15));
+		accOrDeacc.setId(1);
+		expectedAccOrDeaccs.add(accOrDeacc);
+		Mockito.when(accOrDeaccRepo.findByVicinityStartPos(33, 37, AccOrDeacceleratorType.SNAKE.ordinal()))
+				.thenReturn(expectedAccOrDeaccs);
+		List<AccOrDeaccelerator> accOrDeaccs = accOrDeaccService.getVicinityAccOrDeaccByStartPosition(position,
+				AccOrDeacceleratorType.SNAKE);
+		assertEquals(accOrDeacc.getId(), accOrDeaccs.get(0).getId());
+	}
+
+	@Test
+	void testGetSimulationWiseSnakeOrLadderTaken() {
+		TakenAccOrDeAccDiff takenAccOrDeaccDiff = new TakenAccOrDeAccDiff() {
+			@Override
+			public Integer getDiffAmount() {
+				return 20;
+			}
+		};
+		List<TakenAccOrDeAccDiff> expectedTakenAccOrDeaccDiffs = new ArrayList<>();
+		expectedTakenAccOrDeaccDiffs.add(takenAccOrDeaccDiff);
+
+		Mockito.when(accOrDeaccRepo.getSimulationWiseSnakeOrLadderTaken("123", AccOrDeacceleratorType.SNAKE.ordinal()))
+				.thenReturn(expectedTakenAccOrDeaccDiffs);
+		List<TakenAccOrDeAccDiff> takenAccOrDeaccDiffs = accOrDeaccService.getSimulationWiseSnakeOrLadderTaken("123",
+				AccOrDeacceleratorType.SNAKE);
+
+		assertEquals(expectedTakenAccOrDeaccDiffs.get(0).getDiffAmount(), takenAccOrDeaccDiffs.get(0).getDiffAmount());
 	}
 
 }

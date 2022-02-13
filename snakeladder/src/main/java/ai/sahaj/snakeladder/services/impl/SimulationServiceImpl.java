@@ -74,7 +74,7 @@ public class SimulationServiceImpl implements SimulationService {
 
 		Optional<Simulation> optSimulation = simulationRepo.findById(simulationId);
 		if (optSimulation.isEmpty()) {
-			throw new ResourceNotFoundException("Player doesn't exists for given id");
+			throw new ResourceNotFoundException("Simulation doesn't exists for given id");
 		}
 		checkIfSimulationAlreadyExists(simulationDto, simulationId);
 		Simulation simulation = optSimulation.get();
@@ -125,7 +125,7 @@ public class SimulationServiceImpl implements SimulationService {
 	public SimulationDto getSimulation(String simulationId) {
 		Optional<Simulation> optSimulation = simulationRepo.findById(simulationId);
 		if (optSimulation.isEmpty()) {
-			throw new ResourceNotFoundException("Player doesn't exists for given id");
+			throw new ResourceNotFoundException("Simulation doesn't exists for given id");
 		}
 		SimulationDto simulationDto = SimulationDto.builder().build();
 		BeanUtils.copyProperties(optSimulation.get(), simulationDto);
@@ -161,7 +161,7 @@ public class SimulationServiceImpl implements SimulationService {
 			TrackGameMovement trackGameMovement = gameServiceFactory
 					.getGameService(optSimulation.get().getSimulationMode())
 					.play(optSimulation.get(), game, diceService);
-			log.info("Winner is: {}", game.getWinner().getName());
+			log.info("Winner is: {}", trackGameMovement.getGame().getWinner().getName());
 			gameService.saveGame(game);
 			gameAccOrDeaccService.saveAll(new ArrayList<>(trackGameMovement.getGameAccsOrDeaccs()));
 			rollService.saveAllRolls(trackGameMovement.getRolls());
