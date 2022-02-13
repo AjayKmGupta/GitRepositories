@@ -24,7 +24,7 @@ public class TestUtil {
 
 	public static List<Position> getAllPositions() {
 		List<Position> positions = new ArrayList<>();
-		for (int i = BOARD_START_POS; i < BOARD_FINAL_POS; i++) {
+		for (int i = BOARD_START_POS; i <= BOARD_FINAL_POS; i++) {
 			Position position = new Position();
 			position.setId(i);
 			position.setNumber(i);
@@ -45,7 +45,7 @@ public class TestUtil {
 		return simulation;
 	}
 
-	private static List<Player> getPlayers() {
+	public static List<Player> getPlayers() {
 		List<Player> players = new ArrayList<>();
 		Player pl1 = new Player();
 		pl1.setId(1l);
@@ -71,7 +71,7 @@ public class TestUtil {
 		return board;
 	}
 
-	private static List<AccOrDeaccelerator> getAccOrDeaccs() {
+	public static List<AccOrDeaccelerator> getAccOrDeaccs() {
 
 		List<AccOrDeaccelerator> accOrDeaccs = new ArrayList<>();
 
@@ -83,6 +83,7 @@ public class TestUtil {
 		Position finalPos = new Position();
 		finalPos.setNumber(13);
 		accOrDeacc.setFinalPosition(finalPos);
+		accOrDeacc.setId(1);
 
 		AccOrDeaccelerator accOrDeacc1 = new AccOrDeaccelerator();
 		accOrDeacc1.setAccOrDeAccType(AccOrDeacceleratorType.SNAKE);
@@ -90,9 +91,10 @@ public class TestUtil {
 		startPos1.setNumber(55);
 		accOrDeacc1.setStartPos(startPos1);
 		Position finalPos1 = new Position();
-		finalPos1.setNumber(13);
+		finalPos1.setNumber(14);
 		accOrDeacc1.setFinalPosition(finalPos1);
-
+		accOrDeacc1.setId(2);
+		
 		accOrDeaccs.add(accOrDeacc);
 		accOrDeaccs.add(accOrDeacc1);
 		return accOrDeaccs;

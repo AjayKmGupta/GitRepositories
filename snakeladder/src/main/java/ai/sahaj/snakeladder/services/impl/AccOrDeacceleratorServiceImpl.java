@@ -1,6 +1,7 @@
 package ai.sahaj.snakeladder.services.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -127,6 +128,10 @@ public class AccOrDeacceleratorServiceImpl implements AccOrDeacceleratorService 
 
 	private void checkIfAccOrDeaccIsValid(AccOrDeaccelerator accOrDeacc, AddAccOrDeacceleratorDto accOrDeaccDto) {
 
+		if (Objects.isNull(accOrDeaccDto) || Objects.isNull(accOrDeaccDto.getStartPos())
+				|| Objects.isNull(accOrDeaccDto.getFinalPosition())) {
+			throw new BadRequestException("All accelerators and its positions are required");
+		}
 		if (accOrDeaccDto.getAccOrDeAccType() == AccOrDeacceleratorType.LADDER
 				&& accOrDeaccDto.getStartPos().getNumber() > accOrDeaccDto.getFinalPosition().getNumber()) {
 			throw new BadRequestException("Ladder start position should be less than the final position");

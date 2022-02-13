@@ -6,7 +6,7 @@ import ai.sahaj.snakeladder.entity.Simulation;
 
 public interface GameService {
 
-	TrackGameMovement play(Simulation simulation, Game game, DiceService diceServie);
+	TrackGameMovement play(Simulation simulation, Game game, DiceService diceService);
 
 	void saveGame(Game game);
 }
