@@ -26,7 +26,7 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductVO save(ProductVO productVO) {
+    public ProductVO addProduct(ProductVO productVO) {
         Product product = productMapper.toEntity(productVO);
         return productMapper.toDto(productRepository.save(product));
     }

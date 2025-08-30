@@ -1,14 +1,15 @@
 package ai.infrrd.postgres.multitenancy.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.service.spi.Stoppable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Slf4j
 @Component
 public class DataSourceBasedMultiTenantConnectionProviderImpl implements MultiTenantConnectionProvider, Stoppable {
 
@@ -38,23 +39,23 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl implements MultiTe
         releaseConnection((String) tenantIdentifier, connection);
     }
 
-    public <T> T getConnection(String tenantIdentifier) throws SQLException {
+    public Connection getConnection(String tenantIdentifier) throws SQLException {
         final Connection connection = getAnyConnection();
         try {
             connection.createStatement().execute("SET search_path TO " + tenantIdentifier);
         } catch (SQLException e) {
             throw new SQLException("Could not set schema to tenant " + tenantIdentifier, e);
         }
-        return (T) connection;
+        return connection;
     }
 
     public <T> void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
         try {
             connection.createStatement().execute("SET search_path TO public");
         } catch (SQLException e) {
-            // log warning
+            log.error("Could not reset schema to public for tenant " + tenantIdentifier, e);
         }
-        ((Connection) connection).close();
+        connection.close();
     }
 
     @Override

@@ -55,12 +55,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.5.Final</version>
@@ -83,6 +77,38 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.11</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>ai/infrrd/postgres/multitenancy/**</include>
+							</includes>
+							<excludes>
+								<exclude>ai/infrrd/postgres/multitenancy/config/**</exclude>
+								<exclude>ai/infrrd/postgres/multitenancy/dto/**</exclude>
+								<exclude>ai/infrrd/postgres/multitenancy/entity/**</exclude>
+								<exclude>ai/infrrd/postgres/multitenancy/mapper/**</exclude>
+								<exclude>ai/infrrd/postgres/multitenancy/exceptions/**</exclude>
+								<exclude>ai/infrrd/postgres/multitenancy/repository/**</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

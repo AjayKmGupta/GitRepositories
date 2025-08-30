@@ -4,6 +4,8 @@ package ai.infrrd.postgres.multitenancy.controller;
 import ai.infrrd.postgres.multitenancy.dto.ProductVO;
 import ai.infrrd.postgres.multitenancy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +22,13 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping(value = "/all")
-    public List<ProductVO> getProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<ProductVO>> getProducts() {
+        return new ResponseEntity<>( productService.getAllProducts(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/create")
-    public ProductVO createProduct(@RequestBody ProductVO productVO) {
-        return productService.save(productVO);
+    public ResponseEntity<ProductVO> createProduct(@RequestBody ProductVO productVO) {
+        return new ResponseEntity<>( productService.addProduct(productVO), HttpStatus.CREATED );
     }
 }
 
