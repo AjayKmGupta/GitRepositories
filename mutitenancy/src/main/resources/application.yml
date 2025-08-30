@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /multitenancy
+
+spring:
+  application:
+    name: mutitenancy
+  datasource:
+    url: jdbc:postgresql://localhost:5432/products
+    username: appuser
+    password: appwd
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 2000000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        multiTenancy: SCHEMA
+    hibernate:
+      ddl-auto: update
+    show-sql: true
