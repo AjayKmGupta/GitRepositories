@@ -3,7 +3,6 @@ package engineering.everest.courier.app.service;
 import engineering.everest.courier.app.entity.DeliveryPackage;
 import engineering.everest.courier.app.entity.Offer;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.util.Map;
 

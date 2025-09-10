@@ -8,13 +8,6 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <!-- Lombok dependency -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.32</version> <!-- use the latest stable version -->
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
