@@ -1,7 +1,11 @@
 package engineering.everest.courier.app.entity;
 
+import engineering.everest.courier.app.offercriteria.OfferCriteria;
+import engineering.everest.courier.app.util.ValidationUtils;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -9,13 +13,11 @@ public class Offer {
 
     String code;
     double discountRate; // e.g. 0.10 for 10%
-    int minWeight;
-    int maxWeight;
-    int minDistance;
-    int maxDistance;
+    private final List<OfferCriteria> offerCriterias;
 
-    public boolean isApplicable(DeliveryPackage pkg) {
-        return pkg.weight >= minWeight && pkg.weight <= maxWeight && pkg.distance >= minDistance && pkg.distance <= maxDistance;
+    public boolean isApplicable(DeliveryPackage deliveryPackage) {
+        return ValidationUtils.isNotEmpty(offerCriterias) &&
+                offerCriterias.stream().allMatch(criteria -> criteria.isApplicable(deliveryPackage));
     }
 
 }

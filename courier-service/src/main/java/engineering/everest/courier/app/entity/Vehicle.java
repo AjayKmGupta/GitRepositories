@@ -1,17 +1,14 @@
 package engineering.everest.courier.app.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Vehicle {
 
     int maxSpeed;
     int maxWeight;
     double nextAvailable;
 
-    public Vehicle(int maxSpeed, int maxWeight) {
-        this.maxSpeed = maxSpeed;
-        this.maxWeight = maxWeight;
-        this.nextAvailable = 0;
-    }
 }

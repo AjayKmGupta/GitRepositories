@@ -1,7 +1,9 @@
 package engineering.everest.courier.app.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class DeliveryPackage {
 
@@ -13,12 +15,5 @@ public class DeliveryPackage {
     double discount;
     double totalCost;
     double deliveryTime; // in hours
-
-    public DeliveryPackage(String id, int weight, int distance, String offerCode) {
-        this.id = id;
-        this.weight = weight;
-        this.distance = distance;
-        this.offerCode = offerCode;
-    }
 
 }
