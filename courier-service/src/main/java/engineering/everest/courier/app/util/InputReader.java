@@ -34,16 +34,10 @@ public class InputReader {
 
         // Read packages
         for (int i = 0; i < numberOfPackages; i++) {
-            System.out.print("Enter Package ID: ");
-            String id = scanner.next();
-            System.out.print("Enter Package Weight (kg): ");
-            int weight = scanner.nextInt();
-            scanner.nextLine();
-            System.out.print("Enter Package Distance (km): ");
-            int distance = scanner.nextInt();
-            scanner.nextLine();
-            System.out.print("Enter Offer Code (or 'NONE' if not applicable): ");
-            String offerCode = scanner.next();
+            String id = readStringCliInput(scanner, "Enter Package ID: ");
+            int weight = readIntCliInput(scanner, "Enter Package Weight (kg): ");
+            int distance = readIntCliInput(scanner, "Enter Package Distance (km): ");
+            String offerCode = readStringCliInput(scanner, "Enter Offer Code (or 'NONE' if not applicable): ");
             DeliveryPackage pkg = DeliveryPackage.builder()
                     .id(id).weight(weight).distance(distance).offerCode(offerCode).build();
             packages.add(pkg);
@@ -61,15 +55,9 @@ public class InputReader {
      */
     public static List<Vehicle> readVehicles(Scanner scanner) {
         // Read vehicle info
-        System.out.print("Enter total number of vehicles: ");
-        int totalVehicle = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Enter maximum speed of vehicle (km/h): ");
-        int maxSpeed = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Enter maximum carriable weight of vehicle (kg): ");
-        int maxWeight = scanner.nextInt();
-
+        int totalVehicle = readIntCliInput(scanner, "Enter total number of vehicles: ");
+        int maxSpeed = readIntCliInput(scanner, "Enter maximum speed of vehicle (km/h): ");
+        int maxWeight = readIntCliInput(scanner, "Enter maximum carriable weight of vehicle (kg): ");
         List<Vehicle> vehicles = new ArrayList<>();
 
         for (int i = 0; i < totalVehicle; i++) {
@@ -77,5 +65,17 @@ public class InputReader {
             vehicles.add(vehicle);
         }
         return vehicles;
+    }
+
+    public static String readStringCliInput(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
+    }
+
+    public static int readIntCliInput(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        int value = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+        return value;
     }
 }

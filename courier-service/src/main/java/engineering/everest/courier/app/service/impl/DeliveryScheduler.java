@@ -33,7 +33,6 @@ public class DeliveryScheduler {
         List<DeliveryPackage> remaining = new ArrayList<>(packages);
 
         // Sort all packages by heaviest first, if same weight lowest delivery time (distance/maxSpeed).
-        // Sort packages according to priority rules
         sortPackages(remaining);
 
         // Process shipments until no packages remain
@@ -49,7 +48,7 @@ public class DeliveryScheduler {
             }
             double tripTime = calculateTripTime(shipment, chosenVehicle);
             log.debug("Calculated trip time for shipment: {}", tripTime);
-            assignDeliveryTimes(shipment, chosenVehicle, tripTime);
+            assignDeliveryTimes(shipment, chosenVehicle);
             log.debug("Assigned delivery times for shipment size: {}", shipment.size());
             updateVehicleAvailability(chosenVehicle, tripTime);
             log.debug("Updated vehicle availability to {}", chosenVehicle.getNextAvailable());
@@ -128,6 +127,7 @@ public class DeliveryScheduler {
      * @return trip time in hours
      */
     private double calculateTripTime(List<DeliveryPackage> shipment, Vehicle vehicle) {
+        // Shipment trip time is determined by the longest delivery time among its packages considering all the packages are on same route.
         return shipment.stream()
                 .mapToDouble(pkg -> 1.0 * pkg.getDistance() / vehicle.getMaxSpeed())
                 .max()
@@ -139,9 +139,8 @@ public class DeliveryScheduler {
      *
      * @param shipment shipment of packages
      * @param vehicle  vehicle used for shipment
-     * @param tripTime calculated trip time for shipment
      */
-    private void assignDeliveryTimes(List<DeliveryPackage> shipment, Vehicle vehicle, double tripTime) {
+    private void assignDeliveryTimes(List<DeliveryPackage> shipment, Vehicle vehicle) {
         double vehicleAvailable = vehicle.getNextAvailable();
         for (DeliveryPackage pkg : shipment) {
             double deliveryTime = vehicleAvailable + 1.0 * pkg.getDistance() / vehicle.getMaxSpeed();
