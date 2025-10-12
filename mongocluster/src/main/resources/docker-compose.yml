@@ -1,0 +1,57 @@
+services:
+  mongo1:
+    image: mongo:latest
+    container_name: mongo1
+    hostname: mongo1
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+    volumes:
+      - mongo1-data:/data/db
+
+  mongo2:
+    image: mongo:latest
+    container_name: mongo2
+    hostname: mongo2
+    ports:
+      - "27018:27017"
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+    volumes:
+      - mongo2-data:/data/db
+
+  mongo-arbiter:
+    image: mongo:latest
+    container_name: mongo-arbiter
+    ports:
+      - "27019:27017"
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+
+  spring-app:
+    image: my-spring-app
+    container_name: spring-app
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo-arbiter
+    networks:
+      - mongo-cluster
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo1:27017,mongo2:27017,mongo-arbiter:27017/?replicaSet=rs0
+      SPRING_DATA_MONGODB_DATABASE: localTestDB
+
+networks:
+  mongo-cluster:
+    driver: bridge
+    external: true
+
+volumes:
+  mongo1-data:
+  mongo2-data:
