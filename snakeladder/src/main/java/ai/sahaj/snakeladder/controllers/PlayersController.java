@@ -51,7 +51,7 @@ public class PlayersController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated"),
 			@ApiResponse(code = 404, message = "Not found") })
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Void> updateBoard(@PathVariable("id") String playerId,
+	public ResponseEntity<Void> updatePlayer(@PathVariable("id") String playerId,
 			@RequestBody @Validated AddPlayerDto player) {
 		playerService.updatePlayer(playerId, player);
 		return new ResponseEntity<>(HttpStatus.OK);
