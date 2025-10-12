@@ -6,7 +6,10 @@ This application runs three Mongo DB nodes as below.
 3. Arbiter Node (Used only for voting)
 
 It also creates a docker container of the given spring boot application.
-All these containers are started using the command provided in setup.sh file //docker-compose -p mongo-local-cluster up -d
+All these containers are started using the command provided in [setup.sh](src/main/resources/setup.sh) file
+
+Once started, Execute the remaining commands to create mongo replicaSet and make dummy entries
+
 Execute curl http://localhost:8080/api/products to verify the response
 
 Bring down the primary Node and try the command curl http://localhost:8080/api/products
