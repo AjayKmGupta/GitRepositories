@@ -12,7 +12,7 @@
 		<spring-version>5.2.5.RELEASE</spring-version>
 		<hibernate-version>5.3.3.Final</hibernate-version>
 		<jsoup.version>1.14.2</jsoup.version>
-		<jackson.version>2.11.0</jackson.version>
+		<jackson.version>2.12.7.1</jackson.version>
 	</properties>
 	<dependencies>
 		<dependency>
